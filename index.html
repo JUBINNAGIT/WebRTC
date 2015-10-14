@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebRTC client</title>
+    <style type="text/css">
+	div#container {
+	  margin: 0 auto 0 auto;
+	  max-width: 40em;
+	  padding: 1em 1.5em 1.3em 1.5em;
+	}
+
+	video {
+	  background: #222;
+	  margin: 0 0 20px 0;
+	  width: 100%;
+	}
+
+	
+    </style>
+ </head>
+  <body>
+	    <video id="localVideo" autoplay muted></video>
+	    <video id="remoteVideo" autoplay></video>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='js/streamer.js'></script>
+    <script src='js/main.js'></script>
+  </body>
+</html>
