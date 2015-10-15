@@ -35,6 +35,13 @@ var sdpConstraints = {'mandatory': {
   'OfferToReceiveAudio':true,
   'OfferToReceiveVideo':true }};
 
+var remoteVideo = document.querySelector('#remoteVideo');
+
+var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || 
+                       window.webkitRTCPeerConnection || window.msRTCPeerConnection;
+var SessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription ||
+                       window.webkitRTCSessionDescription || window.msRTCSessionDescription;
+
 /////////////////////////////////////////////
 
 var ROOM = parameters.stb_id;
@@ -95,7 +102,7 @@ socket.on('message', function (message){
   console.log('Client received message:', message);
   if (message.type === 'offer') {
     maybeStart(message.from);
-    pc.setRemoteDescription(new RTCSessionDescription(message));
+    pc.setRemoteDescription(new SessionDescription(message));
     doAnswer(message.from);
   } else if (message.type === 'candidate') {
     var candidate = new RTCIceCandidate({
@@ -109,8 +116,6 @@ socket.on('message', function (message){
 });
 
 ////////////////////////////////////////////////////
-
-var remoteVideo = document.querySelector('#remoteVideo');
 
 
 if (location.hostname != "localhost") {
@@ -132,7 +137,7 @@ window.onbeforeunload = function(e){
 
 function createPeerConnection(user) {
   try {
-    pc = new webkitRTCPeerConnection(null);
+    pc = new PeerConnection(null);
     pc.onicecandidate = handleIceCandidate.bind(this, user);
     pc.onaddstream = handleRemoteStreamAdded;
     pc.onremovestream = handleRemoteStreamRemoved;

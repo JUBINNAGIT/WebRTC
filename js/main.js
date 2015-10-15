@@ -35,6 +35,18 @@ var sdpConstraints = {'mandatory': {
   'OfferToReceiveAudio':true,
   'OfferToReceiveVideo':true }};
 
+var localVideo = document.querySelector('#localVideo');
+var constraints = {audio: true, video: true};
+var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || 
+                       window.webkitRTCPeerConnection || window.msRTCPeerConnection;
+var SessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription ||
+                       window.webkitRTCSessionDescription || window.msRTCSessionDescription;
+
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                       
+navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
+
 /////////////////////////////////////////////
 
 var ROOM = parameters.stb_id;
@@ -92,7 +104,7 @@ socket.on('message', function (message){
   }
   console.log('Room Owner received message:', message);
   if (message.type === 'answer') {
-    pc.setRemoteDescription(new RTCSessionDescription(message));
+    pc.setRemoteDescription(new SessionDescription(message));
   } else if (message.type === 'candidate') {
     var candidate = new RTCIceCandidate({
       sdpMLineIndex: message.label,
@@ -105,11 +117,6 @@ socket.on('message', function (message){
 });
 
 ////////////////////////////////////////////////////
-
-var localVideo = document.querySelector('#localVideo');
-var constraints = {audio: false, video: true};
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
 
 
 if (location.hostname != "localhost") {
@@ -143,7 +150,7 @@ window.onbeforeunload = function(e){
 
 function createPeerConnection(user) {
   try {
-    pc = new webkitRTCPeerConnection(null);
+    pc = new PeerConnection(null);
     pc.onicecandidate = handleIceCandidate.bind(this, user);
     console.log('Created RTCPeerConnnection');
   } catch (e) {
