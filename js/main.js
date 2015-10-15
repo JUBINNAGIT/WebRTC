@@ -143,7 +143,7 @@ window.onbeforeunload = function(e){
 
 function createPeerConnection(user) {
   try {
-    pc = new webkitRTCPeerConnection(pc_config, pc_constraints);
+    pc = new webkitRTCPeerConnection(null);
     pc.onicecandidate = handleIceCandidate.bind(this, user);
     console.log('Created RTCPeerConnnection');
   } catch (e) {

@@ -32,8 +32,8 @@ var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 
 // Set up audio and video regardless of what devices are present.
 var sdpConstraints = {'mandatory': {
-  'OfferToReceiveAudio':false,
-  'OfferToReceiveVideo':false }};
+  'OfferToReceiveAudio':true,
+  'OfferToReceiveVideo':true }};
 
 /////////////////////////////////////////////
 
@@ -132,7 +132,7 @@ window.onbeforeunload = function(e){
 
 function createPeerConnection(user) {
   try {
-    pc = new webkitRTCPeerConnection(pc_config, pc_constraints);
+    pc = new webkitRTCPeerConnection(null);
     pc.onicecandidate = handleIceCandidate.bind(this, user);
     pc.onaddstream = handleRemoteStreamAdded;
     pc.onremovestream = handleRemoteStreamRemoved;
