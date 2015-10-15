@@ -3,7 +3,7 @@ var http = require('http');
 var file = new(static.Server)();
 var app = http.createServer(function (req, res) {
   file.serve(req, res);
-}).listen(8081);
+}).listen(3001);
 //var uuid = require('node-uuid');
 var io = require('socket.io').listen(app);
 var LIMIT = 30;

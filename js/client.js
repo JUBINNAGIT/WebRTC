@@ -32,8 +32,8 @@ var pc_constraints = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 
 // Set up audio and video regardless of what devices are present.
 var sdpConstraints = {'mandatory': {
-  'OfferToReceiveAudio':true,
-  'OfferToReceiveVideo':true }};
+  'OfferToReceiveAudio':false,
+  'OfferToReceiveVideo':false }};
 
 /////////////////////////////////////////////
 
@@ -41,7 +41,7 @@ var ROOM = parameters.stb_id;
 var USER = parameters.user_id;
 var roomOwner = null;
 
-var socket = io.connect("10.28.3.59:8081", {forceNew:true, multiplex:true});//
+var socket = io.connect("210.216.54.100:3001", {forceNew:true, multiplex:true});//
 
 if (ROOM !== '') {
   console.log('join', ROOM);

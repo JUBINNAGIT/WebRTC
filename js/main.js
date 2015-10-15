@@ -41,7 +41,7 @@ var ROOM = parameters.stb_id;
 var USER = parameters.user_id;
 var joinUser = null;
 
-var socket = io.connect("10.28.3.59:8081", {forceNew:true, multiplex:true});//
+var socket = io.connect("210.216.54.100:3001", {forceNew:true, multiplex:true});//
 
 if (ROOM !== '') {
   console.log('Create to ', ROOM);
@@ -108,7 +108,7 @@ socket.on('message', function (message){
 
 var localVideo = document.querySelector('#localVideo');
 var constraints = {audio: false, video: true};
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
 
 
