@@ -53,7 +53,7 @@ var ROOM = parameters.stb_id;
 var USER = parameters.user_id;
 var joinUser = null;
 
-var socket = io.connect("210.216.54.100:3001", {forceNew:true, multiplex:true});//
+var socket = io.connect("localhost:3001", {forceNew:true, multiplex:true});//
 
 if (ROOM !== '') {
   console.log('Create to ', ROOM);
