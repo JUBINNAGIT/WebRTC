@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<html np-app ng-controller="JUTVController">
   <head>
     <title>WebRTC client</title>
     <style type="text/css">
@@ -17,6 +16,17 @@
 
 	
     </style>
+  <script src="js/angular.js"></script>
+  <script type="text/javascript" charset="utf-8">
+	var myApp = angular.module('myApp',[]);
+
+	myApp.controller('JUTVController', ['$scope', function($scope) {
+	  ROOM = $scope.room;
+	  USER = $scope.user;
+	  console.log("room/user: " + ROOM + "/" + USER);
+	}]);
+	
+  </script>
  </head>
   <body>
 	    <video id="localVideo" autoplay muted></video>
